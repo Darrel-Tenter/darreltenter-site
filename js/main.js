@@ -52,8 +52,11 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    fadeEls.forEach(el => observer.observe(el));
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    // Small delay ensures layout is complete before observing
+    setTimeout(() => {
+      fadeEls.forEach(el => observer.observe(el));
+    }, 100);
   } else {
     // Fallback: just show all
     fadeEls.forEach(el => el.classList.add('visible'));
